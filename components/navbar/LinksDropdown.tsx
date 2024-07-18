@@ -8,20 +8,16 @@ import {
 import { LuAlignLeft } from "react-icons/lu";
 import Link from "next/link";
 import { Button } from "../ui/button";
-import { NavLink } from "@/types";
 import { links } from "@/constants";
 import UserIcon from "./UserIcon";
-import {
-  SignedOut,
-  SignedIn,
-  SignInButton,
-  SignUpButton,
-  SignOutButton,
-} from "@clerk/nextjs";
-import { link } from "fs";
+import { auth } from "@clerk/nextjs/server";
+import { SignedOut, SignedIn, SignInButton, SignUpButton } from "@clerk/nextjs";
 import SignOutLink from "./SignOutLink";
+import { NavLink } from "@/types";
 
 function LinksDropdown() {
+  const { userId } = auth();
+  const isAdmin = userId === process.env.ADMIN_USER_ID;
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -46,6 +42,7 @@ function LinksDropdown() {
         </SignedOut>
         <SignedIn>
           {links.map((link: NavLink) => {
+            if (link.label === "dashboard" && !isAdmin) return null;
             return (
               <DropdownMenuItem key={link.href}>
                 <Link href={link.href} className="capitalize w-full">

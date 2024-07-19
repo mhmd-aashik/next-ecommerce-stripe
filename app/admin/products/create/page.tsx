@@ -5,11 +5,11 @@ import { faker } from "@faker-js/faker";
 import CheckboxInput from "@/components/form/CheckBoxInput";
 import FormContainer from "@/components/form/FormContainer";
 import FormInput from "@/components/form/FormInput";
-import ImageInput from "@/components/form/ImageInputContainer";
 import PriceInput from "@/components/form/PriceInput";
 import { SubmitButton } from "@/components/form/Button";
 import TextAreaInput from "@/components/form/TextAreaInput";
 import { createProductAction } from "@/lib/actions/fetchProduct.action";
+import ImageInput from "@/components/form/ImageInput";
 
 function CreateProductPage() {
   const name = faker.commerce.productName();
